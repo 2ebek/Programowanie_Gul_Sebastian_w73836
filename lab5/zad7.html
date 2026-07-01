@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <input type="text" id="imie" placeholder="Imię">
+    <input type="text" id="nazwisko" placeholder="Nazwisko">
+    <button id="tableBtn">Dodaj do tabeli</button>
+    <table id="myTable" border="1">
+        <tr><th>Imię</th><th>Nazwisko</th></tr>
+    </table>
+
+    <script>
+        const btn = document.querySelector('#tableBtn');
+        btn.addEventListener('click', () => {
+            const table = document.getElementById("myTable");
+            const row = table.insertRow();
+            row.insertCell(0).textContent = document.getElementById("imie").value;
+            row.insertCell(1).textContent = document.getElementById("nazwisko").value;
+            document.getElementById("imie").value = "";
+            document.getElementById("nazwisko").value = "";
+        });
+    </script>
+</body>
+</html>

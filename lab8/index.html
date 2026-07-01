@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 8</title>
+    <style>
+        body { font-family: sans-serif; }
+        form { display: flex; flex-wrap: wrap; gap: 15px; max-width: 800px; border: 1px solid #ccc; padding: 15px; }
+        .pole { display: flex; flex-direction: column; width: 180px; }
+        .poziom { flex-direction: row; align-items: center; width: 250px; }
+        .blad { color: red; font-size: 11px; display: none; }
+        .ukryte { display: none !important; }
+        button { height: 35px; align-self: flex-end; }
+    </style>
+</head>
+<body>
+
+    <form id="f" novalidate>
+        <div class="pole"><label>Imię*</label><input type="text" id="imie"><div class="blad" id="b-imie">Wymagane</div></div>
+        <div class="pole"><label>Nazwisko*</label><input type="text" id="nazw"><div class="blad" id="b-nazw">Wymagane</div></div>
+        <div class="pole"><label>Email*</label><input type="email" id="email"><div class="blad" id="b-email">Błędny email</div></div>
+        <div class="pole"><label>Hasło*</label><input type="password" id="haslo"><div class="blad" id="b-haslo">Min. 8 znaków (litera, cyfra)</div></div>
+        <div class="pole"><label>Powtórz hasło*</label><input type="password" id="phaslo"><div class="blad" id="b-phaslo">Hasła są różne</div></div>
+        <div class="pole"><label>Telefon</label><input type="text" id="tel"></div>
+        <div class="pole"><label>Data Ur.*</label><input type="date" id="data"><div class="blad" id="b-data">Min. 18 lat</div></div>
+        <div class="pole poziom"><label style="margin-right:10px;">Płeć*</label><input type="radio" name="p" id="pm">M <input type="radio" name="p" id="pk">K<div class="blad" id="b-plec">Wybierz</div></div>
+        <div class="pole"><label>Kraj</label>
+            <select id="kraj"><option value=""></option><option value="Polska">Polska</option><option value="Inny">Inny</option></select>
+        </div>
+        <div class="pole"><label>Województwo</label>
+            <input type="text" id="wt" disabled class="ukryte">
+            <select id="ws" disabled class="ukryte"><option value=""></option><option value="MZ">Mazowieckie</option></select>
+        </div>
+        <div class="pole"><label>Zamieszkania</label><input type="text" id="adz" disabled></div>
+        <div class="pole poziom"><input type="checkbox" id="czek" checked> <label>Ten sam koresp.</label></div>
+        <div class="pole ukryte" id="gk"><label>Korespondencyjny</label><input type="text" id="adk" disabled></div>
+        <button type="submit">Zapisz</button>
+    </form>
+
+    <script>
+        const f = document.getElementById("f"), imie = document.getElementById("imie"), nazw = document.getElementById("nazw"),
+              email = document.getElementById("email"), haslo = document.getElementById("haslo"), phaslo = document.getElementById("phaslo"),
+              tel = document.getElementById("tel"), data = document.getElementById("data"), pm = document.getElementById("pm"),
+              pk = document.getElementById("pk"), kraj = document.getElementById("kraj"), wt = document.getElementById("wt"),
+              ws = document.getElementById("ws"), adz = document.getElementById("adz"), adk = document.getElementById("adk"),
+              czek = document.getElementById("czek"), gk = document.getElementById("gk");
+
+        const waliduj = () => {
+            let ok = true;
+            const sprawdz = (pole, warunek, id) => {
+                const zly = !warunek;
+                document.getElementById(id).style.display = zly ? "block" : "none";
+                if(pole.setCustomValidity) pole.setCustomValidity(zly ? "Błąd" : "");
+                if(zly) ok = false;
+            };
+
+            sprawdz(imie, imie.value.trim().length > 0, "b-imie");
+            sprawdz(nazw, nazw.value.trim().length > 0, "b-nazw");
+            sprawdz(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value), "b-email");
+            sprawdz(haslo, /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(haslo.value), "b-haslo");
+            sprawdz(phaslo, phaslo.value === haslo.value && phaslo.value !== "", "b-phaslo");
+            sprawdz(data, data.value && (new Date() - new Date(data.value)) / 31557600000 >= 18, "b-data");
+            sprawdz(pm, pm.checked || pk.checked, "b-plec");
+            
+            return ok;
+        };
+
+        f.addEventListener("input", (z) => {
+            if(z.target === tel) tel.value = tel.value.replace(/\D/g, "");
+            
+            wt.classList.toggle("ukryte", kraj.value === "Polska" || !kraj.value);
+            ws.classList.toggle("ukryte", kraj.value !== "Polska");
+            wt.disabled = kraj.value === "Polska" || !kraj.value;
+            ws.disabled = kraj.value !== "Polska";
+
+            let woj = ws.disabled ? wt.value : ws.value;
+            adz.disabled = !woj;
+            adk.disabled = !woj || czek.checked;
+
+            gk.classList.toggle("ukryte", czek.checked);
+            
+            waliduj();
+        });
+
+        f.addEventListener("submit", (z) => {
+            z.preventDefault();
+            if (waliduj()) {
+                alert("Zapisano!");
+                f.reset();
+                f.dispatchEvent(new Event("input"));
+            } else {
+                f.reportValidity();
+            }
+        });
+    </script>
+</body>
+</html>

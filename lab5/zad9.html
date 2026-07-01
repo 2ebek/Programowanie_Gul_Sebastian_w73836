@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <input type="number" id="n1" placeholder="Liczba 1">
+    <input type="number" id="n2" placeholder="Liczba 2">
+    <button id="nwdBtn">Oblicz NWD</button>
+    <p id="nwdWynik"></p>
+
+    <script>
+        document.getElementById("nwdBtn").addEventListener('click', () => {
+            let a = Math.abs(parseInt(document.getElementById("n1").value));
+            let b = Math.abs(parseInt(document.getElementById("n2").value));
+            const orgA = a, orgB = b;
+            while (b) {
+                a %= b;
+                [a, b] = [b, a];
+            }
+            document.getElementById("nwdWynik").textContent = `NWD(${orgA}, ${orgB}) = ${a}`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <button id="toggleBtn">Pokaż/Ukryj</button>
+    <div id="box" style="width:100px; height:100px; background:red;"></div>
+
+    <script>
+        const btn = document.querySelector('#toggleBtn');
+        const box = document.querySelector('#box');
+        btn.addEventListener('click', () => {
+            box.style.display = (box.style.display === "none") ? "block" : "none";
+        });
+    </script>
+</body>
+</html>
