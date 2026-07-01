@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <title>Sebastian Gul - Strona Osobista</title>
+</head>
+<body>
+    <header>
+        <h1>Witaj na stronie Sebastiana Gula</h1>
+        <p>Numer albumu: <strong>73836</strong></p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona Główna</a></li>
+                <li><a href="seriale.html">Ulubione Seriale</a></li>
+                <li><a href="ksiazki.html">Ulubione Książki</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <section>
+            <article>
+                <h2>O mnie</h2>
+                <p>Nazywam się <em>Sebastian Gul</em>. Interesuję się nowymi technologiami oraz programowaniem.</p>
+                <img src="profilowe.png" alt="Moje zdjęcie profilowe">
+            </article>
+
+            <article>
+                <h2>Moje Wykształcenie</h2>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Nazwa Szkoły</th>
+                            <th>Miasto</th>
+                            <th>Okres</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Technikum W kolbuszowej</td>
+                            <td>Kolbuszowa</td>
+                            <td>2020 - 2025</td>
+                        </tr>
+                        <tr>
+                            <td>WSIiZ (Informatyka)</td>
+                            <td>Rzeszów</td>
+                            <td>2025 - Obecnie</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <aside>
+            <h3>Szybkie linki</h3>
+            <ul>
+                <li><a href="https://www.google.pl">Wyszukiwarka Google</a></li>
+                <li><a href="https://github.com">Mój GitHub</a></li>
+            </ul>
+        </aside>
+
+        <section id="newsletter">
+            <h3>Your news form</h3>
+            <form action="#">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br><br>
+
+                <input type="checkbox" id="daily" name="daily">
+                <label for="daily">Do you want to get news daily?</label><br><br>
+
+                <input type="radio" id="discount" name="promo" value="10">
+                <label for="discount">Do you want to get 10% discount?</label><br><br>
+
+                <label for="start-day">Select first news day:</label>
+                <input type="date" id="start-day" name="start-day"><br><br>
+
+                <button type="submit">Subscribe!</button>
+            </form>
+        </section>
+    </main>
+
+   
+</body>
+</html>
