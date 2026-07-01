@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <button class="btn">Przycisk 1</button>
+    <button class="btn">Przycisk 2</button>
+    <button class="btn">Przycisk 3</button>
+
+    <script>
+        const przyciski = document.querySelectorAll('.btn');
+        przyciski.forEach(przycisk => {
+            przycisk.addEventListener('click', function() {
+                przyciski.forEach(p => p.style.backgroundColor = "");
+                this.style.backgroundColor = "yellow";
+            });
+        });
+    </script>
+</body>
+</html>

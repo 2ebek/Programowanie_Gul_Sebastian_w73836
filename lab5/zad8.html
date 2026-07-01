@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <input type="number" id="temp">
+    <button onclick="convert('CtoF')">C na F</button>
+    <button onclick="convert('FtoC')">F na C</button>
+    <p id="wynik"></p>
+
+    <script>
+        function convert(mode) {
+            const val = parseFloat(document.getElementById("temp").value);
+            let res;
+            if (mode === 'CtoF') res = (val * 9/5) + 32;
+            else res = (val - 32) * 5/9;
+            document.getElementById("wynik").textContent = "Wynik: " + res;
+        }
+    </script>
+</body>
+</html>
